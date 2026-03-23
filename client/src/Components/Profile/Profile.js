@@ -45,7 +45,7 @@ const Profile = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem("accessToken");
-            const response = await axios.get("http://127.0.0.1:8000/users/addresses", {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/users/addresses`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             setAddresses(response.data.data || []);
@@ -113,11 +113,11 @@ const Profile = () => {
             if (editingAddress) {
                 // The backend uses user_address_id in the URL
                 const userAddrId = editingAddress.user_address_id; 
-                await axios.put(`http://127.0.0.1:8000/users/addresses/${userAddrId}`, payload, {
+                await axios.put(`${process.env.REACT_APP_API_URL}/users/addresses/${userAddrId}`, payload, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
             } else {
-                await axios.post("http://127.0.0.1:8000/users/addresses", payload, {
+                await axios.post(`${process.env.REACT_APP_API_URL}/users/addresses`, payload, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
             }
@@ -135,7 +135,7 @@ const Profile = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem("accessToken");
-            await axios.delete(`http://127.0.0.1:8000/users/addresses/${userAddrId}`, {
+            await axios.delete(`${process.env.REACT_APP_API_URL}/users/addresses/${userAddrId}`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             fetchAddresses();

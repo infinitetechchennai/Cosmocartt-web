@@ -62,7 +62,7 @@ const Payment = () => {
                 height: item.height || 0,
             }));
 
-            const response = await axios.post("http://127.0.0.1:8000/shipping/delhivery/estimate", {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/shipping/delhivery/estimate`, {
                 delivery_pincode: pincode,
                 items: items
             }, {
@@ -109,7 +109,7 @@ const Payment = () => {
         setIsApplyingCoupon(true);
         try {
             const token = localStorage.getItem("accessToken");
-            const response = await axios.post("http://127.0.0.1:8000/coupons/apply", {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/coupons/apply`, {
                 coupon_code: couponCode,
                 subtotal: subtotal
             }, {
@@ -147,7 +147,7 @@ const Payment = () => {
             };
 
             // 1. Create Razorpay Order
-            const { data: orderParams } = await axios.post("http://127.0.0.1:8000/payment/create-order", {
+            const { data: orderParams } = await axios.post(`${process.env.REACT_APP_API_URL}/payment/create-order`, {
                 amount: grandTotal,
                 currency: "INR"
             }, config);
@@ -164,7 +164,7 @@ const Payment = () => {
                 handler: async function (response) {
                     try {
                         // 2. Verify Payment
-                        const verifyRes = await axios.post("http://127.0.0.1:8000/payment/verify", {
+                        const verifyRes = await axios.post(`${process.env.REACT_APP_API_URL}/payment/verify`, {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,
@@ -219,7 +219,7 @@ const Payment = () => {
                                 customer_type: localStorage.getItem("userType") || "b2c"
                             };
 
-                            await axios.post("http://127.0.0.1:8000/orders/place", placeOrderData, config);
+                            await axios.post(`${process.env.REACT_APP_API_URL}/orders/place`, placeOrderData, config);
                             localStorage.removeItem("checkoutAddress");
                             dispatch(deleteCart());
                             navigate("/orders");

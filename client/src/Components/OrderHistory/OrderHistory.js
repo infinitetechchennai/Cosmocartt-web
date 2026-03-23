@@ -29,7 +29,7 @@ const OrderHistory = () => {
                     "Authorization": token ? `Bearer ${token}` : ""
                 }
             }
-            const response = await axios.get(`http://127.0.0.1:8000/orders/user/${username}`, config)
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/orders/user/${username}`, config)
 
             const items = [];
             if (response.data && response.data.orders) {
@@ -102,7 +102,7 @@ const OrderHistoryArea = ({ orders, fetchOrders, loading }) => {
         
         try {
             const token = localStorage.getItem("accessToken");
-            await axios.post(`http://127.0.0.1:8000/orders/${orderId}/cancel`, {}, {
+            await axios.post(`${process.env.REACT_APP_API_URL}/orders/${orderId}/cancel`, {}, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             alert("Order cancelled successfully");
@@ -152,7 +152,7 @@ const OrderHistoryArea = ({ orders, fetchOrders, loading }) => {
                 formData.append("refund_amount", selectedItem.price * (selectedItem.quantity || 1));
             }
 
-            await axios.post(`http://127.0.0.1:8000/returns/${endpoint}`, formData, {
+            await axios.post(`${process.env.REACT_APP_API_URL}/returns/${endpoint}`, formData, {
                 headers: { 
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "multipart/form-data"

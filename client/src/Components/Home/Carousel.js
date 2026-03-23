@@ -39,7 +39,7 @@ const Banner = () => {
                         "Authorization": token ? `Bearer ${token}` : ""
                     }
                 }
-                const response = await axios.get("http://127.0.0.1:8000/hero-banners", config);
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/hero-banners`, config);
                 if (response.data && response.data.success) {
                     setBanners(response.data.data);
                 }

@@ -54,7 +54,7 @@ const Checkout = () => {
                 height: item.height || 0,
             }));
 
-            const response = await axios.post("http://127.0.0.1:8000/shipping/delhivery/estimate", {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/shipping/delhivery/estimate`, {
                 delivery_pincode: pincode,
                 items: items
             }, {
@@ -108,7 +108,7 @@ const Checkout = () => {
             
             setLoadingAddresses(true);
             try {
-                const response = await axios.get("http://127.0.0.1:8000/users/addresses", {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/users/addresses`, {
                     headers: { "Authorization": `Bearer ${token}` }
                 });
                 if (response.data.data && response.data.data.length > 0) {

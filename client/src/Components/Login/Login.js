@@ -60,7 +60,7 @@ const LoginSignup = () => {
 
                     }
 
-                    const response = await axios.post("http://127.0.0.1:8000/auth/login", { ...loginValues, user_type: "b2c" }, config);
+                    const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { ...loginValues, user_type: "b2c" }, config);
                     setLoading(false);
                     showSnackBar("success", "Logged in successfully")
                     localStorage.setItem("userName", loginValues.email)
@@ -164,7 +164,7 @@ const LoginSignup = () => {
         async function sendOtp() {
             try {
                 setLoading(true);
-                await axios.post("http://127.0.0.1:8000/auth/send-verification", { phone: formValues.phone });
+                await axios.post(`${process.env.REACT_APP_API_URL}/auth/send-verification`, { phone: formValues.phone });
                 setOtpSent(true);
                 showSnackBar("success", "OTP Sent to " + formValues.phone);
                 setLoading(false);
@@ -177,7 +177,7 @@ const LoginSignup = () => {
         async function verifyOtpAndRegister() {
             try {
                 setLoading(true);
-                await axios.post("http://127.0.0.1:8000/auth/verify-otp", { phone: formValues.phone, otp: otp });
+                await axios.post(`${process.env.REACT_APP_API_URL}/auth/verify-otp`, { phone: formValues.phone, otp: otp });
                 setOtpVerified(true);
                 showSnackBar("success", "OTP Verified! Now completing registration...");
                 
@@ -189,7 +189,7 @@ const LoginSignup = () => {
                     full_name: formValues.firstName + " " + formValues.lastName,
                     phone_number: formValues.phone
                 };
-                const response = await axios.post("http://127.0.0.1:8000/auth/register/b2c", payload, config);
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register/b2c`, payload, config);
                 setLoading(false);
                 showSnackBar("success", "Registration Successful");
                 setShowLogin(true);

@@ -8,7 +8,7 @@ export const addToCart = (id,quantity)=> async (dispatch)=>{
                 "content-type":"application/json"
             }
         }
-        const {data} = await axios.get(`http://127.0.0.1:8000/products/${id}?user_type=b2c`, config);
+        const {data} = await axios.get(`${process.env.REACT_APP_API_URL}/products/${id}?user_type=b2c`, config);
         const productDetails = data;
         
         // Normalize product data for web components consistency
