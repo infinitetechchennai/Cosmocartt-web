@@ -1,4 +1,4 @@
-# Sevenxt Backend Service
+# cosmocart Backend Service
 
 This directory contains the FastAPI-based backend for the Sevenxt ecosystem. It handles authentication, business logic, payments, and integrations with third-party services.
 
@@ -19,7 +19,6 @@ Create a `.env` file in this directory. You can use `.env.example` as a template
 **Mandatory Variables:**
 - `DATABASE_URL`: PostgreSQL connection string.
 - `JWT_SECRET`: Secret key for authentication.
-- `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`: For SMS services.
 - `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`: For payment processing.
 
 ### 2. Virtual Environment
