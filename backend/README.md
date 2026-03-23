@@ -1,4 +1,4 @@
-# cosmocart Backend Service
+# Cosmocart Backend Service
 
 This directory contains the FastAPI-based backend for the Sevenxt ecosystem. It handles authentication, business logic, payments, and integrations with third-party services.
 
